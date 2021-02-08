@@ -4,7 +4,7 @@
     const canvas = document.getElementsByClassName('whiteboard')[0]
     const context = canvas.getContext('2d')
     const state = {
-        color: 'blue',
+        color: null,
         drawing: false,
         from: {},
         to: {}
@@ -141,4 +141,5 @@
     setCanvas()
 
     document.getElementsByClassName('color')[0].classList.add('active')
+    state.color = document.getElementsByClassName('active')[0].getAttribute('data-color');
 })()
