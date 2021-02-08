@@ -1,38 +1,20 @@
 'use strict';
+
 (function () {
     const canvas = document.getElementsByClassName('whiteboard')[0]
     const context = canvas.getContext('2d')
-    const current = {
-        color: 'blue'
+    const state = {
+        color: 'blue',
+        drawing: false,
+        from: {},
+        to: {}
     }
-    let drawing = false
-
-    canvas.addEventListener('mousedown', onMouseDown, false)
-    canvas.addEventListener('mouseup', onMouseUp, false)
-    canvas.addEventListener('mouseout', onMouseUp, false)
-    canvas.addEventListener('mousemove', throttle(onMouseMove, 10), false)
-
-    //Touch support for mobile devices
-    canvas.addEventListener('touchstart', onMouseDown, false)
-    canvas.addEventListener('touchend', onMouseUp, false)
-    canvas.addEventListener('touchcancel', onMouseUp, false)
-    canvas.addEventListener('touchmove', throttle(onMouseMove, 10), false)
-
-    document.getElementsByClassName('colors')[0].addEventListener('click', (event) => {
-        if (event.target.className.includes('colors')) {
-            return
-        }
-
-        current.color = event.target.className.split(' ')[1]
-    }, false)
-
-    window.addEventListener('resize', setCanvas, false)
-    setCanvas()
-
     const socket = new WebSocket('ws://0.0.0.0:3000')
+
     socket.onopen = function (e) {
         console.log("[open] Connection established")
     }
+
     socket.onmessage = function (event) {
         const message = JSON.parse(event.data)
 
@@ -54,14 +36,10 @@
             color: message.data.color
         }
 
-        drawLine(data)
+        drawLine(data.from, data.to, data.color)
     }
 
-    const drawLine = ({
-        from,
-        to,
-        color
-    }, emit = false) => {
+    const drawLine = (from, to, color) => {
         context.beginPath()
         context.moveTo(from.x, from.y)
         context.lineTo(to.x, to.y)
@@ -69,6 +47,10 @@
         context.lineWidth = 2
         context.stroke()
         context.closePath()
+    }
+
+    const draw = (emit = false) => {
+        drawLine(state.from, state.to, state.color)
 
         if (!emit) {
             return
@@ -81,80 +63,82 @@
             name: 'drawing',
             data: {
                 from: {
-                    x: from.x / canvasWidth,
-                    y: from.y / canvasHeight
+                    x: state.from.x / canvasWidth,
+                    y: state.from.y / canvasHeight
                 },
                 to: {
-                    x: to.x / canvasWidth,
-                    y: to.y / canvasHeight
+                    x: state.to.x / canvasWidth,
+                    y: state.to.y / canvasHeight
                 },
-                color
+                color: state.color
             }
         }))
     }
 
-    function onMouseDown(e) {
-        drawing = true
-        current.x = e.clientX || e.touches[0].clientX
-        current.y = e.clientY || e.touches[0].clientY
+    const onMouseDown = (event) => {
+        state.drawing = true
+
+        state.from.x = event.clientX || event.touches[0].clientX
+        state.from.y = event.clientY || event.touches[0].clientY
     }
 
-    function onMouseUp(e) {
-        if (!drawing) {
+    const onMouseMove = (event) => {
+        if (!state.drawing) {
             return
         }
 
-        drawing = false
+        state.to.x = event.clientX || event.touches[0].clientX
+        state.to.y = event.clientY || event.touches[0].clientY
 
-        const data = {
-            from: current,
-            to: {
-                x: e.clientX || e.touches[0].clientX,
-                y: e.clientY || e.touches[0].clientY
-            },
-            color: current.color
-        }
+        draw(true)
 
-        drawLine(data, true);
+        state.from.x = event.clientX || event.touches[0].clientX
+        state.from.y = event.clientY || event.touches[0].clientY
     }
 
-    function onMouseMove(e) {
-        if (!drawing) {
+    const onMouseUp = (event) => {
+        if (!state.drawing) {
             return
         }
 
-        const data = {
-            from: current,
-            to: {
-                x: e.clientX || e.touches[0].clientX,
-                y: e.clientY || e.touches[0].clientY
-            },
-            color: current.color
-        }
+        state.drawing = false
+        state.to.x = event.clientX || event.touches[0].clientX
+        state.to.y = event.clientY || event.touches[0].clientY
 
-        drawLine(data, true)
-
-        current.x = e.clientX || e.touches[0].clientX
-        current.y = e.clientY || e.touches[0].clientY
-    }
-
-    // Limit the number of events per second
-    function throttle(callback, delay) {
-        let previousCall = new Date().getTime()
-
-        return function () {
-            const time = new Date().getTime()
-
-            if ((time - previousCall) >= delay) {
-                previousCall = time
-                callback.apply(null, arguments)
-            }
-        }
+        draw(true);
     }
 
     // Resize canvas
-    function setCanvas() {
+    const setCanvas = () => {
         canvas.width = window.innerWidth
         canvas.height = window.innerHeight
     }
+
+    canvas.addEventListener('mousedown', onMouseDown, false)
+    canvas.addEventListener('mouseup', onMouseUp, false)
+    canvas.addEventListener('mouseout', onMouseUp, false)
+    canvas.addEventListener('mousemove', onMouseMove, false)
+
+    //Touch support for mobile devices
+    canvas.addEventListener('touchstart', onMouseDown, false)
+    canvas.addEventListener('touchend', onMouseUp, false)
+    canvas.addEventListener('touchcancel', onMouseUp, false)
+    canvas.addEventListener('touchmove', onMouseMove, false)
+
+
+    document.getElementsByClassName('colors')[0].addEventListener('click', (event) => {
+        if (event.target.className.includes('colors')) {
+            return
+        }
+
+        document.getElementsByClassName('active')[0].classList.remove('active')
+
+        state.color = event.target.getAttribute('data-color');
+        event.target.classList.add('active')
+    }, false)
+
+    window.addEventListener('resize', setCanvas, false)
+    setCanvas()
+
+    document.getElementsByClassName('color')[0].classList.add('active')
 })()

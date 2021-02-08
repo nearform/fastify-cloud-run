@@ -33,33 +33,39 @@ body {
 }
 
 .color {
-    height: 2em;
-    width: 2em;
+    height: 2.5em;
+    width: 2.5em;
     margin-bottom: .5em;
     cursor: pointer;
     transition: opacity 500ms;
-}
-
-.color:hover {
     opacity: .5;
 }
 
-.color.black {
+.color:hover {
+    opacity: 1; 
+}
+
+.color.active{
+    border: 4px solid black;
+    opacity: 1;
+}
+
+.color[data-color='black'] {
     background-color: black;
 }
 
-.color.red {
+.color[data-color='red'] {
     background-color: red;
 }
 
-.color.green {
+.color[data-color='green'] {
     background-color: green;
 }
 
-.color.blue {
+.color[data-color='blue'] {
     background-color: blue;
 }
 
-.color.yellow {
+.color[data-color='yellow'] {
     background-color: yellow;
 }
