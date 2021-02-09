@@ -1,6 +1,6 @@
 'use strict';
 
-(function () {
+window.addEventListener('DOMContentLoaded', (event) => {
   const canvas = document.getElementById('whiteboard')
   const context = canvas.getContext('2d')
   const state = {
@@ -137,4 +137,4 @@
 
   document.getElementsByClassName('color')[0].classList.add('active')
   state.color = document.getElementsByClassName('active')[0].getAttribute('data-color');
-})()
+})
