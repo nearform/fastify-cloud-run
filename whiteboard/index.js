@@ -3,10 +3,9 @@ const fastify = require('fastify')({
 })
 const path = require('path')
 
-// fastify.register(require('fastify-static'), {
-//   root: path.join(__dirname, 'public'),
-//   prefix: '/'
-// })
+fastify.register(require('fastify-static'), {
+  root: path.join(__dirname, 'public')
+})
 
 fastify.register(require('fastify-websocket'))
 
@@ -22,4 +21,4 @@ fastify.get('/ws', {
   })
 })
 
-fastify.listen(process.env.PORT || 3000)
+fastify.listen(process.env.PORT || 3000, '0.0.0.0')
