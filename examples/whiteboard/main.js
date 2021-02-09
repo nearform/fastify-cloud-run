@@ -122,7 +122,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   canvas.addEventListener('touchmove', onMouseMove, false)
 
   document.getElementById('colors').addEventListener('click', (event) => {
-    if (event.target.className.includes('colors')) {
+    if (!event.target.className.includes('color')) {
       return
     }
 
