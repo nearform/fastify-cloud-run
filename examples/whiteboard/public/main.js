@@ -1,5 +1,7 @@
 'use strict';
 
+const WS_URL = 'ws://0.0.0.0:3000'
+
 window.addEventListener('DOMContentLoaded', (event) => {
   const canvas = document.getElementById('whiteboard')
   const context = canvas.getContext('2d')
@@ -9,7 +11,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     from: {},
     to: {}
   }
-  const socket = new WebSocket('ws://0.0.0.0:3000')
+  const socket = new WebSocket(WS_URL)
 
   socket.onopen = function (e) {
     console.log("[open] Connection established")

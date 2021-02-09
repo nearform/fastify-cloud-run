@@ -4,21 +4,59 @@ This Fastify WebSocket Whiteboard uses websockets to send and receive message to
 
 It is provided for testing Web sockets capabilities on Cloud Run.
 
-## Testing locally
+## Deploying to Cloud Run
 
-1. Check out this repository and navigate to the ws directory
-
-1. Start the ws server locally:
+You can use the `gcloud` SDK:
 
 ```sh
-npm install
-npm start 
+git clone https://github.com/nearform/fastify-cloud-run.git
+cd fastify-cloud-run/ws
+gcloud beta run deploy fastify-ws --source=.
 ```
 
-1. Open the index.html from this folder as it connects to the ws server
+**Cleanup:** Remove the `fastify-ws` Service you deployed from Cloud Run
+using the [Cloud Console](https://console.cloud.google.com/run).
 
-## Verifying whiteboard ws implementation
+Before deloying the code you will need to change the `WS_URL` in the `public/main.js` with URL to your websocket implementation.
 
-1. After the server starts and you open multiple instances of the html page 
+```sh
+git clone https://github.com/nearform/fastify-cloud-run.git
+cd ../examples/whiteboard
+gcloud beta run deploy fastify-websocket-whiteboard --source=.
+```
 
-1. Draw a line in one of the opened instaces and observe how the lines get drawn on the others too
+> You may need to specify additional options to the command based on how your Cloud Shell is configured
+
+**Cleanup:** Remove the `fastify-websocket-whiteboard` Service you deployed from Cloud Run
+using the [Cloud Console](https://console.cloud.google.com/run).
+
+## Testing locally
+
+1. Check out this repository and navigate to this directory
+
+1. Start the server locally:
+
+   ```sh
+   npm install
+   npm start
+   ```
+
+## Verifying whiteboard websocket implementation
+
+1.  After the server starts, make a request using `curl` 
+
+    ```sh
+    curl -v -N http://localhost:8080
+    ```
+
+    **Note:** If you have deployed on Cloud Run, you can replace `localhost:8080` with your Cloud Run service URL.
+
+1. After the server starts, make a request using `websockat` or another Web socket client.
+
+   ```sh
+   websocat ws://localhost:3000
+   ```
+    
+    **Note:** If you have deployed on Cloud Run, you can replace `localhost:3000` with your Cloud Run service URL and use an online Web socket client like
+
+1. Open multiple instances of the static server to see how it works end to end
