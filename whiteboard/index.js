@@ -3,10 +3,10 @@ const fastify = require('fastify')({
 })
 const path = require('path')
 
-fastify.register(require('fastify-static'), {
-  root: path.join(__dirname, 'public'),
-  prefix: '/'
-})
+// fastify.register(require('fastify-static'), {
+//   root: path.join(__dirname, 'public'),
+//   prefix: '/'
+// })
 
 fastify.register(require('fastify-websocket'))
 
