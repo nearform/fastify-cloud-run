@@ -1,8 +1,10 @@
 'use strict';
 
-const WS_URL = 'ws://0.0.0.0:3000/ws'
 
 window.addEventListener('DOMContentLoaded', (event) => {
+  const origin = location.origin.replace('http','ws')
+  const WS_URL = `${origin}/ws`
+
   const canvas = document.getElementById('whiteboard')
   const context = canvas.getContext('2d')
   const state = {
