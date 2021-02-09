@@ -11,7 +11,7 @@ fastify.register(require('fastify-websocket'), {
 
 fastify.get('/', {
   websocket: true
-}, (connection /* SocketStream */ , req /* FastifyRequest */ ) => {
+}, (connection, req) => {
   connection.socket.on('message', message => {
     fastify.websocketServer.clients.forEach((client) => {
       if (client.readyState === 1) {

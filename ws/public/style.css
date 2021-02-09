@@ -1,71 +1,71 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html,
 body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 /**
  * Canvas
  */
 
-.whiteboard {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
+#whiteboard {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
 }
 
-.colors {
-    position: absolute;
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    top: 0;
-    padding: .5em;
+#colors {
+  position: absolute;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  top: 0;
+  padding: .5em;
 }
 
 .color {
-    height: 2.5em;
-    width: 2.5em;
-    margin-bottom: .5em;
-    cursor: pointer;
-    transition: opacity 500ms;
-    opacity: .5;
+  height: 2.5em;
+  width: 2.5em;
+  margin-bottom: .5em;
+  cursor: pointer;
+  transition: opacity 500ms;
+  opacity: .5;
 }
 
 .color:hover {
-    opacity: 1; 
+  opacity: 1;
 }
 
-.color.active{
-    border: 4px solid black;
-    opacity: 1;
+.color.active {
+  border: 4px solid black;
+  opacity: 1;
 }
 
 .color[data-color='black'] {
-    background-color: black;
+  background-color: black;
 }
 
 .color[data-color='red'] {
-    background-color: red;
+  background-color: red;
 }
 
 .color[data-color='green'] {
-    background-color: green;
+  background-color: green;
 }
 
 .color[data-color='blue'] {
-    background-color: blue;
+  background-color: blue;
 }
 
 .color[data-color='yellow'] {
-    background-color: yellow;
+  background-color: yellow;
 }
