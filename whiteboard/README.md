@@ -35,17 +35,17 @@ using the [Cloud Console](https://console.cloud.google.com/run).
 1.  After the server starts, make a request using `curl` 
 
     ```sh
-    curl -v -N http://localhost:8080
+    curl -v -N http://localhost:3000
     ```
 
-    **Note:** If you have deployed on Cloud Run, you can replace `localhost:8080` with your Cloud Run service URL.
+    **Note:** If you have deployed on Cloud Run, you can replace `localhost:3000` with your Cloud Run service URL.
 
 1. After the server starts, make a request using `websockat` or another Web socket client.
 
    ```sh
-   websocat ws://localhost:8080/ws
+   websocat ws://localhost:3000/ws
    ```
     
-    **Note:** If you have deployed on Cloud Run, you can replace `localhost:8080` with your Cloud Run service URL and use an online Web socket client like
+    **Note:** If you have deployed on Cloud Run, you can replace `localhost:3000` with your Cloud Run service URL and use an online Web socket client like
 
 1. Open multiple instances of the static server to see how it works end to end

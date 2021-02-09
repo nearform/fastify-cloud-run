@@ -20,4 +20,4 @@ fastify.get('/ws', { websocket: true }, (connection, req) => {
   })
 })
 
-fastify.listen(process.env.PORT || 8080)
+fastify.listen(process.env.PORT || 3000)
