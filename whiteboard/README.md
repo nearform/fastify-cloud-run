@@ -10,18 +10,7 @@ You can use the `gcloud` SDK:
 
 ```sh
 git clone https://github.com/nearform/fastify-cloud-run.git
-cd fastify-cloud-run/ws
-gcloud beta run deploy fastify-ws --source=.
-```
-
-**Cleanup:** Remove the `fastify-ws` Service you deployed from Cloud Run
-using the [Cloud Console](https://console.cloud.google.com/run).
-
-Before deloying the code you will need to change the `WS_URL` in the `public/main.js` with URL to your websocket implementation.
-
-```sh
-git clone https://github.com/nearform/fastify-cloud-run.git
-cd ../examples/whiteboard
+cd fastify-cloud-run/whiteboard
 gcloud beta run deploy fastify-websocket-whiteboard --source=.
 ```
 
@@ -54,9 +43,9 @@ using the [Cloud Console](https://console.cloud.google.com/run).
 1. After the server starts, make a request using `websockat` or another Web socket client.
 
    ```sh
-   websocat ws://localhost:3000
+   websocat ws://localhost:8080/ws
    ```
     
-    **Note:** If you have deployed on Cloud Run, you can replace `localhost:3000` with your Cloud Run service URL and use an online Web socket client like
+    **Note:** If you have deployed on Cloud Run, you can replace `localhost:8080` with your Cloud Run service URL and use an online Web socket client like
 
 1. Open multiple instances of the static server to see how it works end to end

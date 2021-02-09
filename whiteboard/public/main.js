@@ -1,6 +1,6 @@
 'use strict';
 
-const WS_URL = 'ws://0.0.0.0:3000'
+const WS_URL = 'ws://0.0.0.0:8080/ws'
 
 window.addEventListener('DOMContentLoaded', (event) => {
   const canvas = document.getElementById('whiteboard')

@@ -5,15 +5,8 @@ const fastify = require('fastify')({
 })
 
 fastify.register(require('fastify-websocket'), {
-  handle: (connection, req) => {
-    connection.socket.on('message', message => {
-      fastify.websocketServer.clients.forEach((client) => {
-        if (client.readyState === 1 && client !== connection.socket) {
-          client.send(message)
-        }
-      })
-    })
-  }
+  // echo server
+  handle: conn => conn.pipe(conn),
 })
 
 fastify.listen(process.env.PORT || 3000, '0.0.0.0')

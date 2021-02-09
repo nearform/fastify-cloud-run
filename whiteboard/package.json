@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "fastify": "^3.10.1",
-    "fastify-static": "^3.4.0"
+    "fastify-static": "^3.4.0",
+    "fastify-websocket": "^3.0.0"
   }
 }
