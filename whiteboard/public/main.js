@@ -2,7 +2,7 @@
 
 
 window.addEventListener('DOMContentLoaded', (event) => {
-  const origin = location.origin.replace('http','ws')
+  const origin = location.origin.replace('http', 'ws')
   const WS_URL = `${origin}/ws`
 
   const canvas = document.getElementById('whiteboard')

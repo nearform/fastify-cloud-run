@@ -29,16 +29,16 @@ body {
   justify-content: flex-start;
   flex-direction: column;
   top: 0;
-  padding: .5em;
+  padding: 0.5em;
 }
 
 .color {
   height: 2.5em;
   width: 2.5em;
-  margin-bottom: .5em;
+  margin-bottom: 0.5em;
   cursor: pointer;
   transition: opacity 500ms;
-  opacity: .5;
+  opacity: 0.5;
 }
 
 .color:hover {
