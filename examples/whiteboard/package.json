@@ -1,0 +1,15 @@
+{
+  "name": "fastify-websocket-whiteboard",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "keywords": [],
+  "author": "Paul Isache <paul.isache@nearform.com>",
+  "license": "ISC",
+  "dependencies": {
+    "fastify": "^3.10.1",
+    "fastify-static": "^3.4.0"
+  }
+}
