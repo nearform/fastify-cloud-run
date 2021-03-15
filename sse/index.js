@@ -7,8 +7,7 @@ const fastify = require('fastify')({
 
 fastify.get('/', function (request, reply) {
   const interval = setInterval(function () {
-    reply.raw.write(new Date().toISOString())
-    reply.raw.write('\n')
+    reply.raw.write(`data:${new Date().toISOString()}\n`)
   }, 1000)
 
   request.raw.on('close', () => {

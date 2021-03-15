@@ -49,8 +49,8 @@ using the [Cloud Console](https://console.cloud.google.com/run).
     < HTTP/2 200
     < date: Mon, 25 Jan 2021 23:01:07 GMT
     <
-    2021-01-25T23:01:07.594Z
-    2021-01-25T23:01:08.595Z
+    data:2021-01-25T23:01:07.594Z
+    data:2021-01-25T23:01:08.595Z
     ```
 
 Since this server intentionally doesn't support upgrading from HTTP/1.1,
